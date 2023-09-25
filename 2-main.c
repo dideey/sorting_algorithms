@@ -18,4 +18,8 @@ int main(void)
     printf("\n");
     print_array(array, n);
     return (0);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a9cdf7cc9dfff686afe8cda2a47dbcdf711f8023

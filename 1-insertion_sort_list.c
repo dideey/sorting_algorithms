@@ -69,13 +69,13 @@ void swap_node(listint_t **list, listint_t **a, listint_t *b)
 
 	else
 	{
-		/* General case */
-		temp_next = temp->next;
-		temp->next = current;
-		current->prev->next = temp;
-		temp->prev = current->prev;
-		current->next = temp_next;
-		temp_next->prev = current;
-		current->prev = temp;
+	/* General case */
+	temp_next = temp->next;
+	temp->next = current;
+	current->prev->next = temp;
+	temp->prev = current->prev;
+	current->next = temp_next;
+	temp_next->prev = current;
+	current->prev = temp;
 	}
 }

@@ -10,8 +10,4 @@ void swap(int *a, int *b)
 	temp = *a;
 	*a = *b;
 	*b = temp;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a9cdf7cc9dfff686afe8cda2a47dbcdf711f8023

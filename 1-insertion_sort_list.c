@@ -1,44 +1,48 @@
 #include "sort.h"
 
+/**
+ * insertion_sort_list - Sorts a doubly linked list of integers
+ * in ascending order using the Insertion sort algorithm.
+ *
+ * @list: A pointer to the head of the doubly linked list.
+ */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *temp, *head = *list;
+	listint_t *temp, *current = (*list)->next;
 
 	if (list == NULL || *list == NULL)
 		return;
 
-	while (head->next)
+	while (current != NULL)
 	{
-		temp = head->next;
+		temp = current;
+		current = current->next;
 
-		if (head->n > temp->n)
+		while (temp->prev != NULL && temp->n < temp->prev->n)
 		{
-			swap_node(list, &head, temp);
+			swap_node(list, &(temp->prev), temp);
 			print_list(*list);
 
-			/* nested loop to continue looping through until sorted */
-			while (head->prev != NULL && head->prev->n > head->n)
-			{
-				swap_node(list, &(head->prev), head);
-				print_list(*list);
-			}
-		}
-		else
-		{
-			head = head->next;
+			if (temp->prev == NULL)
+				*list = temp;
 		}
 	}
 }
 
+/**
+ * swap_node - Custom Function to swap nodes in a linked list
+ * @list: head of linked list
+ * @a: node to be swapped (the bigger value)
+ * @b: node to be swapped (the smaller value)
+ *
+ */
 
 void swap_node(listint_t **list, listint_t **a, listint_t *b)
 {
 	listint_t *current, *temp, *temp_next;
 
-	if (*list == NULL || *a == NULL || b == NULL)
-		return;
-
-	if (*a == b)
+	if (*list == NULL || *a == NULL || b == NULL || (*a == b))
 		return;
 
 	current = *a;
@@ -46,7 +50,6 @@ void swap_node(listint_t **list, listint_t **a, listint_t *b)
 
 	if (current->prev == NULL)
 	{
-		/* if first node (a) is the head node */
 		if (temp->next != NULL)
 			temp->next->prev = current;
 
@@ -57,9 +60,8 @@ void swap_node(listint_t **list, listint_t **a, listint_t *b)
 		*list = temp;
 	}
 
-	else if (temp->next == NULL)
+	else if (temp->next == NULL) /* if second node is last node */
 	{
-		/* if second node is last node */
 		current->prev->next = temp;
 		temp->prev = current->prev;
 		current->prev = temp;
@@ -67,9 +69,8 @@ void swap_node(listint_t **list, listint_t **a, listint_t *b)
 		current->next = NULL;
 	}
 
-	else
+	else /* General Case */
 	{
-	/* General case */
 	temp_next = temp->next;
 	temp->next = current;
 	current->prev->next = temp;
